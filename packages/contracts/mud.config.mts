@@ -1,5 +1,7 @@
 import { mudConfig, resolveTableId } from "@latticexyz/config";
 
+/** -- MUD POS -- */
+
 export default mudConfig({
   overrideSystems: {
     IncrementSystem: {
@@ -7,20 +9,43 @@ export default mudConfig({
       openAccess: true,
     },
   },
+  enums: {
+    TenderType: ["CASH", "DEBIT", "CREDIT", "CRYPTO"],
+    TransactionType: ["BUY", "REFUND", "VOID", "SUSPEND"],
+    PaymentStatus: ["PAID", "PENDING", "PARTIAL"],
+    DiscountType: ["PERCENTAGE", "AMOUNT"],
+    CustomerType: ["NONE", "MEMBER"],
+  },
   tables: {
-    CounterTable: {
-      name: "counter",
+    ItemTable: {
       schema: {
-        value: "uint32",
+        name: "string",
+        price: "uint256",
+        quantity: "uint256",
+        discount: "uint256",
       },
-      storeArgument: true,
+    },
+    InventoryTable: {
+      schema: {
+        item_id: "uint256",
+        quantity: "uint256",
+        location: "string",
+      },
+    },
+    UserTable: {
+      schema: {
+        name: "string",
+        email: "string",
+        password: "string",
+        role: "string",
+      },
     },
   },
   modules: [
     {
       name: "KeysWithValueModule",
       root: true,
-      args: [resolveTableId("CounterTable")],
+      args: [resolveTableId("ItemTable")],
     },
   ],
 });
