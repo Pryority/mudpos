@@ -4,10 +4,12 @@ import { mudConfig, resolveTableId } from "@latticexyz/config";
 
 export default mudConfig({
   overrideSystems: {
+    /**
     IncrementSystem: {
       name: "increment",
       openAccess: true,
     },
+     */
   },
   enums: {
     TenderType: ["CASH", "DEBIT", "CREDIT", "CRYPTO"],
@@ -21,8 +23,8 @@ export default mudConfig({
       schema: {
         name: "string",
         price: "uint256",
+        salePrice: "uint256",
         quantity: "uint256",
-        discount: "uint256",
       },
     },
     InventoryTable: {
@@ -36,8 +38,6 @@ export default mudConfig({
       schema: {
         name: "string",
         email: "string",
-        password: "string",
-        role: "string",
       },
     },
   },
